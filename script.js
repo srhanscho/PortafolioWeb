@@ -1,4 +1,4 @@
-import { animate, stagger } from "https://cdn.jsdelivr.net/npm/animejs@4.0.2/+esm";
+// anime.js v3 loaded via CDN — available as global `anime`
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -10,113 +10,216 @@ if (!prefersReducedMotion) {
     initImageModal();
 }
 
+// ─── Page load animations ──────────────────────────────────────────────────
+
 function initPageAnimations() {
-    animate(".custom-navbar", {
+    anime({
+        targets: ".custom-navbar",
         translateY: [-24, 0],
         opacity: [0, 1],
         duration: 700,
-        ease: "outExpo"
+        easing: "easeOutExpo"
     });
 
-    animate(".hero-content > *", {
-        translateY: [24, 0],
-        opacity: [0, 1],
-        delay: stagger(90, { start: 200 }),
-        duration: 850,
-        ease: "outExpo"
-    });
+    animateHeroTitle();
 
-    animate(".hero-img", {
+    anime({
+        targets: ".hero-img",
         scale: [0.92, 1],
         opacity: [0, 1],
         rotate: [-2, 0],
         delay: 450,
         duration: 950,
-        ease: "outExpo"
+        easing: "easeOutExpo"
     });
 
-    animate(".hero-mini-info span", {
+    anime({
+        targets: ".hero-mini-info span",
         translateY: [14, 0],
         opacity: [0, 1],
-        delay: stagger(80, { start: 650 }),
+        delay: anime.stagger(80, { start: 650 }),
         duration: 650,
-        ease: "outExpo"
+        easing: "easeOutExpo"
     });
 
-    animate(".social-links a", {
+    anime({
+        targets: ".social-links a",
         scale: [0.7, 1],
         opacity: [0, 1],
-        delay: stagger(70, { start: 820 }),
+        delay: anime.stagger(70, { start: 820 }),
         duration: 600,
-        ease: "outBack"
+        easing: "easeOutBack"
+    });
+
+    anime({
+        targets: [".lead-text", ".hero-actions"],
+        translateY: [24, 0],
+        opacity: [0, 1],
+        delay: anime.stagger(90, { start: 1000 }),
+        duration: 850,
+        easing: "easeOutExpo"
     });
 }
 
-function initScrollAnimations() {
-    const revealItems = document.querySelectorAll(
-        ".custom-card, .timeline-item, .gallery-card, .section-title, .section-intro"
-    );
+// 1. Título del hero letra por letra ─────────────────────────────────────────
 
-    revealItems.forEach((item) => {
-        item.classList.add("is-hidden");
+function animateHeroTitle() {
+    const h1 = document.querySelector(".hero-section h1");
+    if (!h1) return;
+
+    const text = h1.textContent;
+    h1.innerHTML = "";
+    text.split("").forEach(char => {
+        const span = document.createElement("span");
+        span.style.display = "inline-block";
+        span.style.opacity = "0";
+        span.textContent = char === " " ? " " : char;
+        h1.appendChild(span);
     });
 
-    const observer = new IntersectionObserver(
+    anime({
+        targets: ".hero-section h1 span",
+        translateY: [20, 0],
+        opacity: [0, 1],
+        delay: anime.stagger(50, { start: 200 }),
+        duration: 600,
+        easing: "easeOutExpo"
+    });
+
+    // Subtítulo aparece completo después del título
+    const subtitle = document.querySelector(".hero-section .subtitle");
+    if (subtitle) {
+        subtitle.style.opacity = "0";
+        anime({
+            targets: subtitle,
+            opacity: [0, 1],
+            translateY: [12, 0],
+            delay: 950,
+            duration: 700,
+            easing: "easeOutExpo"
+        });
+    }
+}
+
+// ─── Scroll animations ────────────────────────────────────────────────────
+
+function initScrollAnimations() {
+    // Reveal general (excluye proyecto-card, que tiene su propio stagger)
+    const generalItems = document.querySelectorAll(
+        ".custom-card:not(.proyecto-card), .timeline-item, .gallery-card, .section-title, .section-intro"
+    );
+
+    generalItems.forEach(item => item.classList.add("is-hidden"));
+
+    const generalObserver = new IntersectionObserver(
         (entries, obs) => {
-            entries.forEach((entry) => {
+            entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
-
-                const element = entry.target;
-                element.classList.remove("is-hidden");
-                element.classList.add("is-visible");
-
-                animate(element, {
+                const el = entry.target;
+                el.classList.remove("is-hidden");
+                el.classList.add("is-visible");
+                anime({
+                    targets: el,
                     translateY: [28, 0],
                     opacity: [0, 1],
                     duration: 780,
-                    ease: "outExpo"
+                    easing: "easeOutExpo"
                 });
-
-                obs.unobserve(element);
+                obs.unobserve(el);
             });
         },
-        {
-            threshold: 0.16,
-            rootMargin: "0px 0px -70px 0px"
-        }
+        { threshold: 0.16, rootMargin: "0px 0px -70px 0px" }
     );
 
-    revealItems.forEach((item) => observer.observe(item));
+    generalItems.forEach(item => generalObserver.observe(item));
 
+    // 2. Cards de proyectos con stagger ─────────────────────────────────────
+    initProjectCardsAnimation();
+
+    // 3. Barras de habilidades ───────────────────────────────────────────────
+    initSkillChipsAnimation();
+}
+
+// 2. Proyecto cards: fade + slide up con stagger de 150ms ─────────────────
+
+function initProjectCardsAnimation() {
+    const cards = Array.from(document.querySelectorAll(".proyecto-card"));
+    if (!cards.length) return;
+
+    cards.forEach(card => card.classList.add("is-hidden"));
+
+    const projectRow = document.querySelector("#proyectos .row");
+    if (!projectRow) return;
+
+    let triggered = false;
+
+    const observer = new IntersectionObserver(
+        (entries, obs) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting || triggered) return;
+                triggered = true;
+
+                cards.forEach(c => {
+                    c.classList.remove("is-hidden");
+                    c.classList.add("is-visible");
+                });
+
+                anime({
+                    targets: cards,
+                    translateY: [40, 0],
+                    opacity: [0, 1],
+                    delay: anime.stagger(150),
+                    duration: 800,
+                    easing: "easeOutExpo"
+                });
+
+                obs.unobserve(entry.target);
+            });
+        },
+        { threshold: 0.05 }
+    );
+
+    observer.observe(projectRow);
+}
+
+// 3. Skill chips: fill de izquierda a derecha con clip-path ───────────────
+
+function initSkillChipsAnimation() {
     const skillSections = document.querySelectorAll(".skills-grid");
 
-    skillSections.forEach((section) => {
-        const chips = section.querySelectorAll(".skill-chip");
+    skillSections.forEach(section => {
+        const chips = Array.from(section.querySelectorAll(".skill-chip"));
+
+        chips.forEach(chip => {
+            chip.style.clipPath = "inset(0 100% 0 0)";
+            chip.style.opacity = "0";
+        });
 
         const skillObserver = new IntersectionObserver(
             (entries, obs) => {
-                entries.forEach((entry) => {
+                entries.forEach(entry => {
                     if (!entry.isIntersecting) return;
 
-                    animate(chips, {
-                        translateY: [18, 0],
+                    anime({
+                        targets: chips,
+                        clipPath: ["inset(0 100% 0 0)", "inset(0 0% 0 0)"],
                         opacity: [0, 1],
-                        delay: stagger(55),
-                        duration: 600,
-                        ease: "outExpo"
+                        delay: anime.stagger(80),
+                        duration: 800,
+                        easing: "easeOutQuart"
                     });
 
                     obs.unobserve(section);
                 });
             },
-            {
-                threshold: 0.22
-            }
+            { threshold: 0.22 }
         );
 
         skillObserver.observe(section);
     });
 }
+
+// ─── Image modal ──────────────────────────────────────────────────────────
 
 function initImageModal() {
     const modal = document.getElementById("imageModal");
@@ -126,36 +229,31 @@ function initImageModal() {
 
     if (!modal || !modalImg || !closeModal) return;
 
-    galleryImages.forEach((img) => {
+    galleryImages.forEach(img => {
         img.addEventListener("click", () => {
             modal.classList.add("active");
             modalImg.src = img.src;
             modalImg.alt = img.alt;
 
             if (!prefersReducedMotion) {
-                animate(modalImg, {
+                anime({
+                    targets: modalImg,
                     scale: [0.96, 1],
                     opacity: [0, 1],
                     duration: 350,
-                    ease: "outExpo"
+                    easing: "easeOutExpo"
                 });
             }
         });
     });
 
-    closeModal.addEventListener("click", () => {
-        modal.classList.remove("active");
+    closeModal.addEventListener("click", () => modal.classList.remove("active"));
+
+    modal.addEventListener("click", event => {
+        if (event.target === modal) modal.classList.remove("active");
     });
 
-    modal.addEventListener("click", (event) => {
-        if (event.target === modal) {
-            modal.classList.remove("active");
-        }
-    });
-
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-            modal.classList.remove("active");
-        }
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") modal.classList.remove("active");
     });
 }
