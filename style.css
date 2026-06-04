@@ -102,11 +102,27 @@ strong {
 /* Navigation */
 .custom-navbar {
     z-index: 1000;
-    background: rgba(3, 3, 3, 0.82);
-    border-bottom: 1px solid var(--border-soft);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: transparent;
+    border-bottom: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    padding: 14px 16px;
+}
+
+.custom-navbar > .container {
+    background: rgba(3, 3, 3, 0.88);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+    padding: 0.5rem 1.5rem;
+    transition: border-radius 0.28s ease;
+}
+
+.custom-navbar > .container:has(.navbar-collapse.show) {
+    border-radius: 24px;
 }
 
 .logo-img {
