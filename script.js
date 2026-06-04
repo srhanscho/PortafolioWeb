@@ -2,6 +2,9 @@
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// History nav runs always (not animation-dependent)
+initHistoryNav();
+
 if (!prefersReducedMotion) {
     initPageAnimations();
     initScrollAnimations();
@@ -256,4 +259,44 @@ function initImageModal() {
     document.addEventListener("keydown", event => {
         if (event.key === "Escape") modal.classList.remove("active");
     });
+}
+
+// ─── History API navigation (clean URLs, no #) ────────────────────────────
+
+function initHistoryNav() {
+    // Intercept all internal hash-link clicks
+    document.addEventListener("click", event => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+
+        const sectionId = link.getAttribute("href").slice(1); // "#inicio" → "inicio"
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+
+        event.preventDefault();
+        history.pushState({ sectionId }, "", `/${sectionId}`);
+        section.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Handle browser back / forward
+    window.addEventListener("popstate", () => {
+        const sectionId = getPathnameSection();
+        if (!sectionId) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+        const section = document.getElementById(sectionId);
+        if (section) section.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // On direct URL access (e.g. /logros), scroll to the matching section
+    const sectionId = getPathnameSection();
+    if (sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) setTimeout(() => section.scrollIntoView({ behavior: "smooth" }), 300);
+    }
+}
+
+function getPathnameSection() {
+    return window.location.pathname.replace(/^\/|\/$/g, "") || null;
 }
