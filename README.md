@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="imagenes/fotoHan%27s.jpg" alt="Foto de Han's De Ávila" width="200" />
-</p>
+
 
 # Han's De Ávila
 
