@@ -461,6 +461,100 @@
 
             <div class="row g-4 justify-content-center">
 
+                <!-- LA VACA -->
+                <div class="col-lg-10">
+                    <div class="custom-card proyecto-card">
+                        <div class="project-top-meta">
+                            <span class="timeline-date">2026</span>
+                            <span class="project-badge">Hackathon</span>
+                        </div>
+
+                        <h3 class="mb-2">La Vaca</h3>
+                        <h5 class="mb-3 proyecto-subtitle">Hackathon | Pagos divididos con Interledger</h5>
+
+                        <p>
+                            <strong>La Vaca</strong> es una app para dividir la cuenta del restaurante y cobrar cada parte
+                            de verdad. En lugar de calcular quién debe qué, mueve el dinero: el anfitrión crea la cuenta,
+                            se genera un QR y cada comensal paga su parte directamente desde su wallet a la del restaurante.
+                        </p>
+
+                        <p>
+                            Construida durante una hackatón, usa la API de <strong>Open Payments (Interledger)</strong> para
+                            que varios pagos converjan en una sola cuenta sin que la app custodie los fondos. La barra de
+                            progreso se llena en tiempo real y al llegar al 100% la cuenta se cierra con su recibo detallado.
+                        </p>
+
+                        <div class="tech-stack">
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">TypeScript</span>
+                            <span class="tech-pill">Tailwind CSS</span>
+                            <span class="tech-pill">Vite</span>
+                            <span class="tech-pill">Node.js</span>
+                            <span class="tech-pill">Express</span>
+                            <span class="tech-pill">Interledger / Open Payments</span>
+                        </div>
+
+                        <div class="project-links mt-4">
+                            <a href="https://github.com/srhanscho/la-vaca-hackaton" target="_blank" class="btn btn-main">
+                                Ver repositorio
+                            </a>
+                        </div>
+
+                        <div class="project-image-wrapper mt-4">
+                            <img src="imagenes/proyectos/la-vaca_image.png" alt="Imagen de La Vaca" class="project-image gallery-img">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANELLO -->
+                <div class="col-lg-10">
+                    <div class="custom-card proyecto-card">
+                        <div class="project-top-meta">
+                            <span class="timeline-date">2026</span>
+                            <span class="project-badge subtle">SaaS</span>
+                        </div>
+
+                        <h3 class="mb-2">Panello</h3>
+                        <h5 class="mb-3 proyecto-subtitle">Proyecto propio | Plataforma multi-tenant para negocios</h5>
+
+                        <p>
+                            <strong>Panello</strong> es una plataforma de gestión para pequeños negocios: cada uno tiene su
+                            panel privado para administrar productos, categorías, menús del día, descuentos, pedidos, venta
+                            en caja y reportes, además de una tienda pública propia a la que se llega por su slug.
+                        </p>
+
+                        <p>
+                            El proyecto está construido con arquitectura <strong>multi-tenant</strong>, aislando los datos de
+                            cada negocio con Row Level Security en Supabase, autenticación JWT
+                            y roles de dueño y empleado. Aquí trabajo backend, modelo de datos, seguridad y sistema de diseño.
+                        </p>
+
+                        <div class="tech-stack">
+                            <span class="tech-pill">FastAPI</span>
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">React / Expo</span>
+                            <span class="tech-pill">Supabase</span>
+                            <span class="tech-pill">PostgreSQL</span>
+                            <span class="tech-pill">JWT</span>
+                            <span class="tech-pill">Multi-tenant</span>
+                        </div>
+
+                        <div class="project-links mt-4">
+                            <a href="https://panello-eight.vercel.app" target="_blank" class="btn btn-main">
+                                Ver Panello
+                            </a>
+
+                            <a href="https://github.com/srhanscho/panello" target="_blank" class="btn btn-outline-light">
+                                Ver repositorio
+                            </a>
+                        </div>
+
+                        <div class="project-image-wrapper mt-4">
+                            <img src="imagenes/proyectos/panello_image.png" alt="Imagen de Panello" class="project-image gallery-img">
+                        </div>
+                    </div>
+                </div>
+
                 <!-- CAMILA -->
                 <div class="col-lg-10">
                     <div class="custom-card proyecto-card">
@@ -685,8 +779,38 @@
             <h2 class="section-title">Galería</h2>
 
             <p class="section-intro text-center mx-auto">
-                Capturas y recursos visuales de mis proyectos, incluyendo NixoCore y Dungeon Trade.
+                Capturas y recursos visuales de mis proyectos, incluyendo La Vaca, Panello, NixoCore y Dungeon Trade.
             </p>
+
+            <div class="gallery-group mb-5">
+                <h3 class="gallery-group-title">La Vaca</h3>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="gallery-card">
+                            <img src="imagenes/LaVaca/la-vaca-1.png" alt="Creación de una vaca en La Vaca" class="gallery-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-group mb-5">
+                <h3 class="gallery-group-title">Panello</h3>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="gallery-card">
+                            <img src="imagenes/Panello/panello-1.png" alt="Panel de productos en Panello" class="gallery-img">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="gallery-card">
+                            <img src="imagenes/Panello/panello-2.png" alt="Gestión de pedidos en Panello" class="gallery-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="gallery-group mb-5">
                 <h3 class="gallery-group-title">NixoCore</h3>
