@@ -96,7 +96,7 @@ API REST para gestionar personajes RPG y simular batallas estratégicas. Proyect
 - **Correo:** hsdeavila@outlook.com
 - **GitHub:** [github.com/srhanscho](https://github.com/srhanscho)
 - **Instagram:** [@hansdeavila](https://www.instagram.com/hansdeavila)
-- **WhatsApp:** [w.app/hansdeavila](https://w.app/hansdeavila)
+- **WhatsApp:** [wa.me/573226787358](https://wa.me/573226787358)
 
 ---
 
