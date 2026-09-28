@@ -4,6 +4,7 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 
 // History nav runs always (not animation-dependent)
 initHistoryNav();
+initProjectSort();
 
 if (!prefersReducedMotion) {
     initPageAnimations();
@@ -11,6 +12,43 @@ if (!prefersReducedMotion) {
     initImageModal();
 } else {
     initImageModal();
+}
+
+// ─── Project sort ─────────────────────────────────────────────────────────
+
+function initProjectSort() {
+    const list = document.getElementById("projectList");
+    const buttons = document.querySelectorAll(".sort-btn");
+    if (!list || !buttons.length) return;
+
+    const comparators = {
+        rank: (a, b) => a.dataset.rank - b.dataset.rank,
+        date: (a, b) => b.dataset.date.localeCompare(a.dataset.date)
+    };
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            buttons.forEach(b => {
+                const active = b === btn;
+                b.classList.toggle("is-active", active);
+                b.setAttribute("aria-pressed", active);
+            });
+
+            const items = Array.from(list.querySelectorAll(":scope > [data-rank]"));
+            items.sort(comparators[btn.dataset.sort]).forEach(item => list.appendChild(item));
+
+            if (!prefersReducedMotion) {
+                anime({
+                    targets: list.querySelectorAll(".proyecto-card"),
+                    translateY: [20, 0],
+                    opacity: [0, 1],
+                    delay: anime.stagger(60),
+                    duration: 500,
+                    easing: "easeOutQuad"
+                });
+            }
+        });
+    });
 }
 
 // ─── Page load animations ──────────────────────────────────────────────────

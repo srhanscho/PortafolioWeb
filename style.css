@@ -724,6 +724,10 @@ strong {
     margin-bottom: 0.9rem;
 }
 
+.project-top-meta .timeline-date {
+    margin-bottom: 0;
+}
+
 .project-badge {
     width: fit-content;
     display: inline-flex;
@@ -741,6 +745,42 @@ strong {
     color: var(--text-soft);
     border: 1px solid rgba(255, 255, 255, 0.06);
     background: rgba(255, 255, 255, 0.03);
+}
+
+.project-sort {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0 auto 2rem;
+}
+
+.sort-btn {
+    padding: 0.55rem 1.15rem;
+    border-radius: var(--radius-pill);
+    color: var(--text-soft);
+    border: 1px solid var(--border-medium);
+    background: var(--surface-light);
+    font-size: 0.9rem;
+    font-weight: 750;
+    cursor: pointer;
+    transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.sort-btn:hover {
+    color: var(--text-main);
+    border-color: var(--accent-mid);
+}
+
+.sort-btn.is-active {
+    color: #ffffff;
+    border-color: transparent;
+    background: linear-gradient(135deg, #b91414 0%, var(--accent) 58%, #ff3030 100%);
+}
+
+.sort-btn:focus-visible {
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 2px;
 }
 
 .tech-stack {

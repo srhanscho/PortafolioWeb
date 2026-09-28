@@ -469,7 +469,6 @@
     </section>
 
     <!-- PROYECTOS -->
-        <!-- PROYECTOS -->
     <section id="proyectos" class="section-space">
         <div class="container">
             <h2 class="section-title">Proyectos</h2>
@@ -479,13 +478,18 @@
                 las APIs y la creación de experiencias con personalidad visual.
             </p>
 
-            <div class="row g-4 justify-content-center">
+            <div class="project-sort" role="group" aria-label="Ordenar proyectos">
+                <button type="button" class="sort-btn is-active" data-sort="rank" aria-pressed="true">Destacados</button>
+                <button type="button" class="sort-btn" data-sort="date" aria-pressed="false">Más recientes</button>
+            </div>
+
+            <div class="row g-4 justify-content-center" id="projectList">
 
                 <!-- LA VACA -->
-                <div class="col-lg-10">
+                <div class="col-lg-10" data-date="2026-08-01" data-rank="1">
                     <div class="custom-card proyecto-card">
                         <div class="project-top-meta">
-                            <span class="timeline-date">2026</span>
+                            <span class="timeline-date"><time datetime="2026-08-01">Ago 2026</time></span>
                             <span class="project-badge">Hackathon</span>
                         </div>
 
@@ -531,10 +535,10 @@
                 </div>
 
                 <!-- PANELLO -->
-                <div class="col-lg-10">
+                <div class="col-lg-10" data-date="2026-06-10" data-rank="2">
                     <div class="custom-card proyecto-card">
                         <div class="project-top-meta">
-                            <span class="timeline-date">2026</span>
+                            <span class="timeline-date"><time datetime="2026-06-10">Jun 2026</time></span>
                             <span class="project-badge subtle">SaaS</span>
                         </div>
 
@@ -580,10 +584,10 @@
                 </div>
 
                 <!-- GRANDPA BURGERS -->
-                <div class="col-lg-10">
+                <div class="col-lg-10" data-date="2026-06-13" data-rank="3">
                     <div class="custom-card proyecto-card">
                         <div class="project-top-meta">
-                            <span class="timeline-date">2026</span>
+                            <span class="timeline-date"><time datetime="2026-06-13">Jun 2026</time></span>
                             <span class="project-badge subtle">Caso real</span>
                         </div>
 
@@ -629,10 +633,10 @@
                 </div>
 
                 <!-- CAMILA -->
-                <div class="col-lg-10">
+                <div class="col-lg-10" data-date="2026-05-16" data-rank="4">
                     <div class="custom-card proyecto-card">
                         <div class="project-top-meta">
-                            <span class="timeline-date">2026</span>
+                            <span class="timeline-date"><time datetime="2026-05-16">May 2026</time></span>
                             <span class="project-badge">Hackathon</span>
                         </div>
 
@@ -671,10 +675,10 @@
                 </div>
 
                 <!-- CALETA -->
-                <div class="col-lg-10">
+                <div class="col-lg-10" data-date="2026-05-19" data-rank="5">
                     <div class="custom-card proyecto-card">
                         <div class="project-top-meta">
-                            <span class="timeline-date">2026</span>
+                            <span class="timeline-date"><time datetime="2026-05-19">May 2026</time></span>
                             <span class="project-badge subtle">En construcción</span>
                         </div>
 
@@ -709,10 +713,10 @@
                 </div>
 
                 <!-- NIXOCORE -->
-                <div class="col-lg-10">
+                <div class="col-lg-10" data-date="2026-04-25" data-rank="6">
                     <div class="custom-card proyecto-card featured-project">
                         <div class="project-top-meta">
-                            <span class="timeline-date">2026</span>
+                            <span class="timeline-date"><time datetime="2026-04-25">Abr 2026</time></span>
                             <span class="project-badge">Proyecto destacado</span>
                         </div>
 
@@ -752,10 +756,10 @@
                 </div>
 
                 <!-- KART PARTY -->
-                <div class="col-lg-10">
+                <div class="col-lg-10" data-date="2026-09-24" data-rank="7">
                     <div class="custom-card proyecto-card">
                         <div class="project-top-meta">
-                            <span class="timeline-date">2026</span>
+                            <span class="timeline-date"><time datetime="2026-09-24">Sep 2026</time></span>
                             <span class="project-badge subtle">Videojuego</span>
                         </div>
 
@@ -801,10 +805,10 @@
                 </div>
 
                 <!-- DUNGEON TRADE -->
-                <div class="col-lg-10">
+                <div class="col-lg-10" data-date="2025-10-01" data-rank="8">
                     <div class="custom-card proyecto-card">
                         <div class="project-top-meta">
-                            <span class="timeline-date">2025</span>
+                            <span class="timeline-date"><time datetime="2025-10-01">Oct 2025</time></span>
                             <span class="project-badge subtle">Videojuego</span>
                         </div>
 
@@ -854,10 +858,10 @@
                 </div>
 
                 <!-- MYTHIC CLASH API -->
-                <div class="col-lg-10">
+                <div class="col-lg-10" data-date="2026-04-23" data-rank="9">
                     <div class="custom-card proyecto-card">
                         <div class="project-top-meta">
-                            <span class="timeline-date">2026</span>
+                            <span class="timeline-date"><time datetime="2026-04-23">Abr 2026</time></span>
                             <span class="project-badge subtle">Backend / API</span>
                         </div>
 
