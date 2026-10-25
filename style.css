@@ -747,6 +747,19 @@ strong {
     background: rgba(255, 255, 255, 0.03);
 }
 
+.custom-card .project-award {
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.55rem 0.95rem;
+    border-radius: var(--radius-sm);
+    color: #ffd98a;
+    border: 1px solid rgba(255, 200, 80, 0.28);
+    background: rgba(255, 190, 60, 0.08);
+    font-weight: 750;
+    line-height: 1.45;
+}
+
 .project-sort {
     display: flex;
     justify-content: center;
